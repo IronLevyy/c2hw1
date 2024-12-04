@@ -16,16 +16,17 @@ public class ProductBasket {
     }
 
     public int getPriceBasket() {
-        int summ = 0;
+        int totalPrice = 0;
         for (Product product : basket) {
-            summ += product.getPrice();
+            totalPrice += product.getPrice();
         }
-        return summ;
+        return totalPrice;
     }
 
     public void printContentBasket() {
         if (basket.isEmpty()) {
             System.out.println("В корзине пусто!");
+            return;
         }
         for (Product product : basket) {
             System.out.println(product.getName() + ":" + product.getPrice());
@@ -35,7 +36,7 @@ public class ProductBasket {
 
     public boolean checkContentNameInBasket(String name) {
         for (Product product : basket) {
-            if (product.getName().equals(name)) {
+            if (product.getName().equalsIgnoreCase(name)) {
                 return true;
             }
         }
