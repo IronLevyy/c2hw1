@@ -28,10 +28,15 @@ public class ProductBasket {
             System.out.println("В корзине пусто!");
             return;
         }
+        int specialProductCounter = 0;
         for (Product product : basket) {
-            System.out.println(product.getName() + ":" + product.getPrice());
+            System.out.println(product);
+            if (product.isSpecial()) {
+                specialProductCounter++;
+            }
         }
         System.out.println("Итого: " + getPriceBasket());
+        System.out.println("Специальных товаров: " + specialProductCounter);
     }
 
     public boolean checkContentNameInBasket(String name) {
