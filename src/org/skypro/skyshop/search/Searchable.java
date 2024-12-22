@@ -1,14 +1,10 @@
 package org.skypro.skyshop.search;
 
-public interface Searcheble {
+public interface Searchable {
     String searchTerm();
     String getSearchName();
     String getSearchType();
     default void getStringRepresentation(){
         System.out.println("Название: " + getSearchName() + "\nТип: " + getSearchType());
-    }
-
-    default void addObjectToSearchList(Searcheble obj) {
-        SearchEngine.addSearcheble(obj);
     }
 }

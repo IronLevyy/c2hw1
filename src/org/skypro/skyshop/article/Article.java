@@ -1,15 +1,14 @@
 package org.skypro.skyshop.article;
 
-import org.skypro.skyshop.search.Searcheble;
+import org.skypro.skyshop.search.Searchable;
 
-public class Article implements Searcheble {
+public class Article implements Searchable {
     private final String title;
     private final String body;
 
     public Article(String title, String body) {
         this.title = title;
         this.body = body;
-        addObjectToSearchList(this);
     }
 
     @Override

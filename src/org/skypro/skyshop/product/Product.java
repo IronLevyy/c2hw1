@@ -1,13 +1,12 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.search.Searcheble;
+import org.skypro.skyshop.search.Searchable;
 
-public abstract class Product implements Searcheble {
+public abstract class Product implements Searchable {
     private final String name;
 
     public Product(String name) {
         this.name = name;
-        addObjectToSearchList(this);
     }
 
     public String getName() {
