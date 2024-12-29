@@ -1,42 +1,41 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.product.DiscountProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.search.Searchable;
+
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-
+        SearchEngine searchEngine = new SearchEngine();
         SimpleProduct milk = new SimpleProduct("Молоко", 70);
+        searchEngine.addObjectToSearchList(milk);
         SimpleProduct eggs = new SimpleProduct("Яйца", 120);
-        FixPriceProduct bread = new FixPriceProduct("Хлеб");
-        DiscountProduct butter = new DiscountProduct("Масло", 200, 50);
+        searchEngine.addObjectToSearchList(eggs);
+        FixPriceProduct bread = new FixPriceProduct("Молоко");
+        searchEngine.addObjectToSearchList(bread);
+        DiscountProduct butter = new DiscountProduct("Молоко", 200, 50);
+        searchEngine.addObjectToSearchList(butter);
         SimpleProduct banana = new SimpleProduct("Бананы", 90);
+        searchEngine.addObjectToSearchList(banana);
+        Article firstArticle = new Article("Первая статья", "Текст");
+        searchEngine.addObjectToSearchList(firstArticle);
+        Article secondArticle = new Article("Вторая статья", "Текст");
+        searchEngine.addObjectToSearchList(secondArticle);
 
-        ProductBasket basket = new ProductBasket();
+        ArrayList<Searchable> searchOne = searchEngine.search("Первая статья Текст");
+        ArrayList<Searchable> searchTwo = searchEngine.search("Молоко");
 
-        basket.addProduct(milk);
-        basket.addProduct(eggs);
-        basket.addProduct(bread);
-        basket.addProduct(butter);
-        basket.addProduct(banana);
-        System.out.println("Добавление продукта в заполненную корзину, в которой нет свободного места.");
-        basket.addProduct(banana);
-        System.out.println("Печать содержимого корзины с несколькими товарами.");
-        basket.printContentBasket();
-        System.out.println("Получение стоимости корзины с несколькими товарами.");
-        System.out.println("Стоимость товаров равна: " + basket.getPriceBasket());
-        System.out.println("Поиск товара, который есть в корзине. \"Молоко\"");
-        System.out.println(basket.checkContentNameInBasket("Молоко"));
-        System.out.println("Поиск товара, которого нет в корзине. \"Машина\"");
-        System.out.println(basket.checkContentNameInBasket("Машина"));
-        System.out.println("Очистка корзины и печать содержимого пустой корзины.");
-        basket.clearBasket();
-        basket.printContentBasket();
-        System.out.println("Получение стоимости пустой корзины.");
-        System.out.println("Стоимость товаров равна: " + basket.getPriceBasket());
-        System.out.println("Поиск товара по имени в пустой корзине. \"Молоко\"");
-        System.out.println(basket.checkContentNameInBasket("Молоко"));
+        for (Searchable searchable : searchOne) {
+            searchable.getStringRepresentation();
+       }
+
+        for (Searchable searchable : searchTwo) {
+            searchable.getStringRepresentation();
+       }
     }
 }
