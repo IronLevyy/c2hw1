@@ -57,7 +57,6 @@ public class App {
         basket.printContentBasket();
         System.out.println(basket.deleteProductFromBasket("Машина"));
         basket.printContentBasket();
-
     }
 
 
