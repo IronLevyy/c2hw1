@@ -1,8 +1,10 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.DiscountProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.BestResultNotFound;
 import org.skypro.skyshop.search.SearchEngine;
@@ -14,10 +16,10 @@ public class App {
 
     public static void main(String[] args) {
         SearchEngine searchEngine = new SearchEngine();
-            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("",70));
-            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Яйца", -120));
+            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Хлеб",70));
+            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Яйца", 120));
             safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Молоко"));
-            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Молоко",200,150));
+            safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Молоко",200,50));
             safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Банан",90));
             safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Первая статья", "Текст"));
             safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Первая статья", "Это моя Первая статья"));
@@ -33,12 +35,6 @@ public class App {
         } catch (BestResultNotFound e) {
             System.err.println("Ошибка " + e.getMessage());
         }
-        try {
-            Searchable searchTestTwo = searchEngine.getMostSuitable("Инкогнито");
-            System.out.println(searchTestTwo);
-        } catch (BestResultNotFound e) {
-            System.err.println("Ошибка " + e.getMessage());
-        }
 
         for (Searchable searchable : searchOne) {
             searchable.getStringRepresentation();
@@ -47,7 +43,24 @@ public class App {
         for (Searchable searchable : searchTwo) {
             searchable.getStringRepresentation();
         }
+
+        ProductBasket basket = new ProductBasket();
+        basket.addProduct(safelyCreateProduct("Хлеб",70));
+        basket.addProduct(safelyCreateProduct("Яйца", 120));
+        basket.addProduct(safelyCreateProduct("Молоко"));
+        basket.addProduct(safelyCreateProduct("Молоко",200,50));
+        basket.addProduct(safelyCreateProduct("Масло",200,50));
+        basket.addProduct(safelyCreateProduct("Банан",90));
+
+
+        System.out.println(basket.deleteProductFromBasket("Молоко"));
+        basket.printContentBasket();
+        System.out.println(basket.deleteProductFromBasket("Машина"));
+        basket.printContentBasket();
+
     }
+
+
 
     private static void safelyAddToSearchEngine(SearchEngine searchEngine, Searchable searchable) {
         if (searchable != null) {
@@ -55,7 +68,7 @@ public class App {
         }
     }
 
-    private static Searchable safelyCreateProduct(String name, int price, int discount) {
+    private static Product safelyCreateProduct(String name, int price, int discount) {
         try {
             return new DiscountProduct(name, price, discount);
         } catch (IllegalArgumentException e) {
@@ -63,7 +76,7 @@ public class App {
         }
         return null;
     }
-    private static Searchable safelyCreateProduct(String name, int price) {
+    private static Product safelyCreateProduct(String name, int price) {
         try {
             return new SimpleProduct(name, price);
         } catch (IllegalArgumentException e) {
@@ -71,7 +84,7 @@ public class App {
         }
         return null;
     }
-    private static Searchable safelyCreateProduct(String name) {
+    private static Product safelyCreateProduct(String name) {
         try {
             return new FixPriceProduct(name);
         } catch (IllegalArgumentException e) {
@@ -79,7 +92,7 @@ public class App {
         }
         return null;
     }
-    private static Searchable safelyCreateArticle(String title, String body) {
+    private static Article safelyCreateArticle(String title, String body) {
         try {
             return new Article(title, body);
         } catch (IllegalArgumentException e) {
@@ -87,4 +100,6 @@ public class App {
         }
         return null;
     }
+
+
 }
