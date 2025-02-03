@@ -52,17 +52,13 @@ public class ProductBasket {
 
     public List<Product> deleteProductFromBasket(String productName) {
         List<Product> deletedProducts = new ArrayList<>();
-        List<Product> basketToDelete = new ArrayList<>(basket);
         Iterator<Product> iterator = basket.iterator();
         while (iterator.hasNext()) {
             Product product = iterator.next();
             if (product.getName().equalsIgnoreCase(productName)) {
-                basketToDelete.remove(product);
-                deletedProducts.add(product);
+                iterator.remove();
             }
         }
-        clearBasket();
-        basket.addAll(basketToDelete);
         return deletedProducts;
     }
 }
