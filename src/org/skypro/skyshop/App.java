@@ -11,6 +11,7 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class App {
 
@@ -26,8 +27,8 @@ public class App {
             safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Вторая статья", "Текст"));
 
 
-        ArrayList<Searchable> searchOne = searchEngine.search("Первая статья Текст");
-        ArrayList<Searchable> searchTwo = searchEngine.search("Молоко");
+        Map<String, Searchable> searchOne = searchEngine.search("Первая статья Текст");
+        Map<String, Searchable> searchTwo = searchEngine.search("Молоко");
 
         try {
             Searchable searchTestOne = searchEngine.getMostSuitable("Первая статья");
@@ -36,12 +37,12 @@ public class App {
             System.err.println("Ошибка " + e.getMessage());
         }
 
-        for (Searchable searchable : searchOne) {
-            searchable.getStringRepresentation();
+        for (String key : searchOne.keySet()) {
+            searchOne.get(key).getStringRepresentation();
         }
 
-        for (Searchable searchable : searchTwo) {
-            searchable.getStringRepresentation();
+        for (String key : searchTwo.keySet()) {
+            searchTwo.get(key).getStringRepresentation();
         }
 
         ProductBasket basket = new ProductBasket();
@@ -53,9 +54,9 @@ public class App {
         basket.addProduct(safelyCreateProduct("Банан",90));
 
 
-        System.out.println(basket.deleteProductFromBasket("Молоко"));
+        System.out.println(basket.deleteProductFromBasket("Молоко", 100));
         basket.printContentBasket();
-        System.out.println(basket.deleteProductFromBasket("Машина"));
+        System.out.println(basket.deleteProductFromBasket("Машина",99));
         basket.printContentBasket();
     }
 
