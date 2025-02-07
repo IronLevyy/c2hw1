@@ -1,9 +1,10 @@
 package org.skypro.skyshop.search;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchEngine{
-    private ArrayList<Searchable> searchables = new ArrayList<>();
+    private List<Searchable> searchables = new ArrayList<>();
 
     public void addSearcheble(Searchable obj) {
         searchables.add(obj);
@@ -14,9 +15,6 @@ public class SearchEngine{
         for (Searchable searchable : searchables) {
             if (searchable.searchTerm().equals(searchParam)) {
                 searched.add(searchable);
-            }
-            if (searched.size() == 5) {
-                break;
             }
         }
         return searched;
