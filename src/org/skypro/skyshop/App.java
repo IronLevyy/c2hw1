@@ -10,7 +10,6 @@ import org.skypro.skyshop.search.BestResultNotFound;
 import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class App {
@@ -54,9 +53,9 @@ public class App {
         basket.addProduct(safelyCreateProduct("Банан",90));
 
 
-        System.out.println(basket.deleteProductFromBasket("Молоко", 100));
+        System.out.println(basket.deleteProductFromBasket("Молоко"));
         basket.printContentBasket();
-        System.out.println(basket.deleteProductFromBasket("Машина",99));
+        System.out.println(basket.deleteProductFromBasket("Машина"));
         basket.printContentBasket();
     }
 

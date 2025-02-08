@@ -4,7 +4,6 @@ import org.skypro.skyshop.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.List;
 
@@ -60,17 +59,12 @@ public class ProductBasket {
         basket.clear();
     }
 
-    public List<Product> deleteProductFromBasket(String productName, int price) {
+    public List<Product> deleteProductFromBasket(String productName) {
         List<Product> deletedProducts = new ArrayList<>();
         for (String key : basket.keySet()) {
-            Iterator<Product> iterator = basket.get(key).iterator();
-            while (iterator.hasNext()) {
-                Product product = iterator.next();
-                if (product.getName().equalsIgnoreCase(productName)&&product.getPrice() == price) {
-                    iterator.remove();
-                    deletedProducts.add(product);
+                if (productName.trim().equals(key)) {
+                    basket.remove(key);
                 }
-            }
         }
         return deletedProducts;
     }
