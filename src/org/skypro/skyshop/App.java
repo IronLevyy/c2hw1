@@ -11,6 +11,7 @@ import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class App {
 
@@ -21,13 +22,13 @@ public class App {
             safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Молоко"));
             safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Молоко",200,50));
             safelyAddToSearchEngine (searchEngine, safelyCreateProduct("Банан",90));
-            safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Первая статья", "Текст"));
+            safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Первая статья", "Это моя Первая статья"));
             safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Первая статья", "Это моя Первая статья"));
             safelyAddToSearchEngine (searchEngine, safelyCreateArticle("Вторая статья", "Текст"));
 
 
-        Map<String, Searchable> searchOne = searchEngine.search("Первая статья Текст");
-        Map<String, Searchable> searchTwo = searchEngine.search("Молоко");
+        Set<Searchable> searchOne = searchEngine.search("Первая статья Это моя Первая статья");
+        Set<Searchable> searchTwo = searchEngine.search("Молоко");
 
         try {
             Searchable searchTestOne = searchEngine.getMostSuitable("Первая статья");
@@ -35,13 +36,14 @@ public class App {
         } catch (BestResultNotFound e) {
             System.err.println("Ошибка " + e.getMessage());
         }
-
-        for (String key : searchOne.keySet()) {
-            searchOne.get(key).getStringRepresentation();
+        System.out.println("Поиск номер 1:");
+        for (Searchable searchable : searchOne) {
+            searchable.getStringRepresentation();
         }
 
-        for (String key : searchTwo.keySet()) {
-            searchTwo.get(key).getStringRepresentation();
+        System.out.println("Поиск номер 2:");
+        for (Searchable searchable : searchTwo) {
+            searchable.getStringRepresentation();
         }
 
         ProductBasket basket = new ProductBasket();

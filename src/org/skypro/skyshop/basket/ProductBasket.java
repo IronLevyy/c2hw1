@@ -2,10 +2,7 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
     private Map<String, ArrayList<Product>> basket = new HashMap<>();
@@ -61,10 +58,13 @@ public class ProductBasket {
 
     public List<Product> deleteProductFromBasket(String productName) {
         List<Product> deletedProducts = new ArrayList<>();
-        for (String key : basket.keySet()) {
-                if (productName.trim().equals(key)) {
-                    basket.remove(key);
-                }
+        Iterator<String> iterator = basket.keySet().iterator();
+        while(iterator.hasNext()) {
+            String key = iterator.next();
+            if(basket.get(key).contains(productName)) {
+                deletedProducts.addAll(basket.get(key));
+                iterator.remove();
+            }
         }
         return deletedProducts;
     }
