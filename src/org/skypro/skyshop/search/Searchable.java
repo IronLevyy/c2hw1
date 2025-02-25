@@ -7,4 +7,7 @@ public interface Searchable {
     default void getStringRepresentation(){
         System.out.println("Название: " + getSearchName() + "\nТип: " + getSearchType());
     }
+    default int compareTo(Searchable other){
+        return getSearchName().compareTo(other.getSearchName());
+    }
 }
