@@ -33,10 +33,10 @@ public class ProductBasket {
     }
 
     private long getSpetialProductCount() {
-        long SpetialProductCount = basket.values().stream().flatMap(Collection::stream)
+        long spetialProductCount = basket.values().stream().flatMap(Collection::stream)
                 .filter(Product::isSpecial)
                 .count();
-        return SpetialProductCount;
+        return spetialProductCount;
     }
 
     public boolean checkContentNameInBasket(String name) {
